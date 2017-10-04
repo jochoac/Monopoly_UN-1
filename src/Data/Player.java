@@ -19,13 +19,15 @@ public class Player
     private int money;
     private int posX;
     private int posY;
+    private boolean giveUp;
 
-    public Player(String username, boolean hasTurn, int money, int posX, int posY) {
+    public Player(String username, boolean hasTurn, int money, int posX, int posY, boolean giveUp) {
         this.username = username;
         this.hasTurn = hasTurn;
         this.money = money;
         this.posX = posX;
         this.posY = posY;
+        this.giveUp = giveUp;
     }
     
     public int getMoney() {
@@ -58,6 +60,14 @@ public class Player
 
     public void setCards(ArrayList<Card> cards) {
         this.cards = cards;
+    }
+
+    public boolean isGiveUp() {
+        return giveUp;
+    }
+
+    public void setGiveUp(boolean giveUp) {
+        this.giveUp = giveUp;
     }
 
     public int getPosX() {

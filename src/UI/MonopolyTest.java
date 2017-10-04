@@ -1,5 +1,6 @@
 package UI;
 
+import BusinessLogic.TurnController;
 import Data.Board;
 import Data.Player;
 import java.util.Random;
@@ -16,10 +17,10 @@ public class MonopolyTest {
      */
     private static Scanner reader = new Scanner(System.in);
     private static Scanner reader2 = new Scanner(System.in);
-    private static Player p1 = new Player(null, false, 200,0,0);
-    private static Player p2 = new Player(null, false, 200,0,0);
-    private static Player p3 = new Player(null, false, 200,0,0);
-    private static Player p4 = new Player(null, false, 200,0,0);
+    private static Player p1 = new Player(null, false, 200, 0, 0, false);
+    private static Player p2 = new Player(null, false, 200, 0, 0, true);
+    private static Player p3 = new Player(null, false, 200, 0, 0, true);
+    private static Player p4 = new Player(null, false, 200, 0, 0, true);
 
     public static void main(String[] args) {
         MonopolyConsole console = new MonopolyConsole();
@@ -31,66 +32,84 @@ public class MonopolyTest {
                 if (b >= 1) {
                     System.out.println("Write username for player 1");
                     String name = reader2.nextLine();
-                    p1 = new Player(name, true, 2205,0,0);
+                    p1 = new Player(name, true, 2205, 0, 0, false);
                     if (b >= 2) {
                         System.out.println("Write username for player 2");
                         String name2 = reader2.nextLine();
-                        p2 = new Player(name2, false, 2205,0,0);
+                        p2 = new Player(name2, false, 2205, 0, 0, false);
                         if (b >= 3) {
                             System.out.println("Write username for player 3");
                             String name3 = reader2.nextLine();
-                            p3 = new Player(name3, false, 2205, 0,0);
+                            p3 = new Player(name3, false, 2205, 0, 0, false);
                             if (b == 4) {
                                 System.out.println("Write username for player 4");
                                 String name4 = reader2.nextLine();
-                                p4 = new Player(name4, false, 2205,0,0);
+                                p4 = new Player(name4, false, 2205, 0, 0, false);
                             }
                         }
                     }
-                }
-                System.out.println("List of players:");
-                System.out.println(p1.getUsername());
-                if (p2.getUsername() != null) {
-                    System.out.println(p2.getUsername());
-                }
-                if (p3.getUsername() != null) {
-                    System.out.println(p3.getUsername());
-                }
-                if (p4.getUsername() != null) {
-                    System.out.println(p4.getUsername());
                 }
                 Board gb = new Board();
                 Random dice = new Random();
-                System.out.println(gb.printBoard(p1.getUsername(), 0, 0));
-                System.out.println(" 1- Play turn\n 2- My info");
-                int optionTurn = reader2.nextInt(2);
-                switch (optionTurn) {
-                    case 1: {                        
-                        int ale = dice.nextInt(6);
-                        System.out.println("Your number is: " + ale);
-                        
-                        if (p1.getPosX() >= 0 && p1.getPosX() < 11) {
-                            int position = p1.getPosX()+ale;
-                            if (position > 11) {
-                                p1.setPosX(11);
-                                position-=11;
-                            }
-                            p1.setPosY(position);
-                        }
-                        System.out.println(gb.printBoard(p1.getUsername(), 0, ale));
-                        
-                        break;
-                    }
-                    case 2:{
-                        
-                    }
+                TurnController turn = new TurnController();
+                int option;
+
+                System.out.println("List of players:");
+
+                if (turn.validatePlayer(p1)) {
+                    System.out.println(p1.getUsername());
                 }
+                if (turn.validatePlayer(p2)) {
+                    System.out.println(p2.getUsername());
+                }
+                if (turn.validatePlayer(p3)) {
+                    System.out.println(p3.getUsername());
+                }
+                if (turn.validatePlayer(p4)) {
+                    System.out.println(p4.getUsername());
+                }
+                System.out.println(gb.printBoard(p1.getUsername(), 0, 0));
+                do {
+                    Player player = new Player("default", false, 0, -1, 0, true);
+                    System.out.println(" 1- Play turn\n 2- My info\n 3 - Give up");
+                    option = reader2.nextInt(3);
+                    switch (option) {
+                        case 1: {                            
+                            if (turn.validatePlayer(p4) && p4.isHasTurn()) {
+                                player = turn.playTurn(p4);
+                                p4 = player;
+                                p4.setHasTurn(false);
+                                p1.setHasTurn(true);
+                            }
+                            if (turn.validatePlayer(p3) && p3.isHasTurn()) {
+                                player = turn.playTurn(p3);
+                                p3 = player;
+                                p3.setHasTurn(false);
+                                p4.setHasTurn(true);
 
-                break;
-            case 2:
-                System.exit(0);
-                break;
+                            }
+                            if (turn.validatePlayer(p2) && p2.isHasTurn()) {
+                                player = turn.playTurn(p2);
+                                p2 = player;
+                                p2.setHasTurn(false);
+                                p3.setHasTurn(true);
+                            }
+                            if (p1.isHasTurn() && turn.validatePlayer(p1)) {
+                                player = turn.playTurn(p1);
+                                p1 = player;
+                                p1.setHasTurn(false);
+                                p2.setHasTurn(true);
+                            }
+
+                            System.out.println(gb.printBoard(player.getUsername(), player.getPosY(), player.getPosX()));
+
+                            break;
+
+                        }
+                    }
+
+                } while (!p1.isGiveUp() || !p2.isGiveUp() || !p3.isGiveUp() || !p4.isGiveUp());
+
         }
-
     }
 }
