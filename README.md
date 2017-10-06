@@ -1,8 +1,10 @@
 
 <h1>Monopoly_UN</h1>
 #
-Monopoly Game
-# 
+ ---- Monopoly Game
+
+#
+
 * Author: 
   * **Diego Ruiz**
   * **Juan Ochoa**
