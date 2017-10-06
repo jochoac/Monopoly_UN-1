@@ -1,6 +1,10 @@
-# Monopoly_UN
+
+<h1>Monopoly_UN</h1>
+#
 Monopoly Game
 
-Author: Juan
-        Diego
-        Mateo
+# 
+Author: 
+**Diego Ruiz**
+**Juan Ochoa**
+**Mateo **
