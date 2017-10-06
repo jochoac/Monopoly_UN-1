@@ -51,9 +51,12 @@ public class TurnController {
 
         int x, y;
         int numberDice;
+        
         Random dice = new Random();
-
-        numberDice = dice.nextInt(6);
+        do {
+            numberDice = dice.nextInt(6);
+        } while (numberDice == 0);
+        
         System.out.println("Your number is: " + numberDice);
         if (player.getPosY() == 0 && player.getPosX() < 11) {
             x = player.getPosX();
@@ -97,8 +100,8 @@ public class TurnController {
             }
         }
         player.setHasTurn(false);
-        
-        return player;    
-        
+
+        return player;
+
     }
 }

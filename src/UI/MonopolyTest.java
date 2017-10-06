@@ -8,7 +8,8 @@ import java.util.Scanner;
 
 /**
  *
- * @author - Juan Ochoa - Diego Ruiz
+ * @author - Juan Ochoa 
+ *         - Diego Ruiz
  */
 public class MonopolyTest {
 
@@ -23,8 +24,18 @@ public class MonopolyTest {
     private static Player p4 = new Player(null, false, 200, 0, 0, true);
 
     public static void main(String[] args) {
+
+        /*
+         *   Generate MonopolyConsole
+         *
+         */
         MonopolyConsole console = new MonopolyConsole();
         console.welcome();
+
+        /*
+         *   Select numbers of players
+         *
+         */
         switch (console.getOption()) {
             case 1:
                 System.out.println("Select number of players (1 to 4)");
@@ -49,13 +60,26 @@ public class MonopolyTest {
                         }
                     }
                 }
+
+                /*
+                 *   Generate board
+                 *
+                 */
                 Board gb = new Board();
-                Random dice = new Random();
                 TurnController turn = new TurnController();
+
+                /*
+                 *   Selection of player
+                 *
+                 */
                 int option;
 
-                System.out.println("List of players:");
-
+                /*
+                 *   Print to players
+                 *
+                 */
+                System.out.println("\n\n ----- List of players -----");
+                System.out.println("______________________________________");
                 if (turn.validatePlayer(p1)) {
                     System.out.println(p1.getUsername());
                 }
@@ -68,12 +92,21 @@ public class MonopolyTest {
                 if (turn.validatePlayer(p4)) {
                     System.out.println(p4.getUsername());
                 }
+                System.out.println("______________________________________");
+
+                // Print to board for first time
                 System.out.println(gb.printBoard(p1.getUsername(), 0, 0));
+
+                // Play Game
                 do {
                     Player player = new Player("default", false, 0, -1, 0, true);
                     System.out.println(" 1- Play turn\n 2- My info\n 3 - Give up");
                     option = reader2.nextInt(3);
                     switch (option) {
+                        /*
+                         *   Turns
+                         *
+                         */
                         case 1: {
                             if (turn.validatePlayer(p1) && p1.isHasTurn()) {
                                 player = turn.playTurn(p1);
@@ -96,12 +129,12 @@ public class MonopolyTest {
                                 p3 = player;
                                 if (turn.validatePlayer(p4)) {
                                     p4.setHasTurn(true);
-                                }else{
+                                } else {
                                     p1.setHasTurn(true);
                                 }
                             } else if (turn.validatePlayer(p4) && p4.isHasTurn()) {
                                 player = turn.playTurn(player);
-                                p4 = player;                                
+                                p4 = player;
                                 p1.setHasTurn(true);
                             } else {
                                 System.out.println("Error lógico en validación de usuarios");
@@ -111,11 +144,27 @@ public class MonopolyTest {
                             break;
 
                         }
-
+                        /*
+                         *   Info player
+                         *
+                         */
                         case 2: {
-                            // Info user
+                            if (p1.isHasTurn()) {
+                                
+                            } else if (p2.isHasTurn()) {
+                                
+                            } else if (p3.isHasTurn()) {
+                                
+                            } else if (p4.isHasTurn()) {
+                                
+                            }
+
                             break;
                         }
+                        /*
+                         *   Player give up
+                         *
+                         */
                         case 3: {
                             if (p1.isHasTurn()) {
                                 p1.setGiveUp(true);

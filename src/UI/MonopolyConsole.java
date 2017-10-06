@@ -2,7 +2,8 @@ package UI;
 
 /**
  *
- * @author - Juan Ochoa - Diego Ruiz
+ * @author - Juan Ochoa 
+ *         - Diego Ruiz
  */
 public class MonopolyConsole implements ui {
 
