@@ -93,7 +93,7 @@ public class TurnController {
                 player.setPosY(y);
                 player.setPosX(x);
             } else {
-                player.setPosX(y - numberDice);
+                player.setPosY(y - numberDice);
             }
         }
         player.setHasTurn(false);
