@@ -4,7 +4,7 @@
 Monopoly Game
 
 # 
-Author: 
-**Diego Ruiz**
-**Juan Ochoa**
-**Mateo **
+* Author: 
+  * **Diego Ruiz**
+  * **Juan Ochoa**
+  * **Mateo**
