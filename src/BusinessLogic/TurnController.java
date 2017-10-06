@@ -5,14 +5,16 @@
  */
 package BusinessLogic;
 
+import Data.Player;
 import Data.Square;
+import java.util.Random;
 
 /**
  *
  * @author Juan Ochoa
  */
-public class TurnController 
-{
+public class TurnController {
+
     private Square startPoint;
     private Square endPoint;
     private int numberOfMoves;
@@ -40,5 +42,63 @@ public class TurnController
     public void setNumberOfMoves(int numberOfMoves) {
         this.numberOfMoves = numberOfMoves;
     }
-    
+
+    public boolean validatePlayer(Player player) {
+        return !player.isGiveUp();
+    }
+
+    public Player playTurn(Player player) {
+
+        int x, y;
+        int numberDice;
+        Random dice = new Random();
+
+        numberDice = dice.nextInt(6);
+        System.out.println("Your number is: " + numberDice);
+        if (player.getPosY() == 0 && player.getPosX() < 11) {
+            x = player.getPosX();
+            if (x + numberDice > 10) {
+                y = (x + numberDice) - 10;
+                x = 10;
+                player.setPosY(y);
+                player.setPosX(x);
+            } else {
+                player.setPosX(x + numberDice);
+            }
+        } else if (player.getPosX() == 10 && player.getPosY() < 11) {
+            y = player.getPosY();
+            if (y + numberDice > 10) {
+                x = player.getPosX() - numberDice;
+                y = 10;
+                player.setPosX(x);
+                player.setPosY(y);
+            } else {
+                player.setPosY(y + numberDice);
+            }
+        } else if (player.getPosY() == 10 && player.getPosX() < 11) {
+            x = player.getPosX();
+            if (x - numberDice < 0) {
+                y = player.getPosY() - numberDice;
+                x = 0;
+                player.setPosY(y);
+                player.setPosX(x);
+            } else {
+                player.setPosX(x - numberDice);
+            }
+        } else if (player.getPosX() == 0 && player.getPosY() < 11) {
+            y = player.getPosY();
+            if (y - numberDice < 0) {
+                x = player.getPosX() + numberDice;
+                y = 0;
+                player.setPosY(y);
+                player.setPosX(x);
+            } else {
+                player.setPosY(y - numberDice);
+            }
+        }
+        player.setHasTurn(false);
+        
+        return player;    
+        
+    }
 }
