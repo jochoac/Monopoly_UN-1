@@ -7,11 +7,12 @@ import java.util.ArrayList;
  * @author - Juan Ochoa
  *         - Diego Ruiz
  */
-public class Player 
-{
+public class Player{
+    
     private String username;
     private boolean hasTurn;
     private ArrayList<Card> cards = new ArrayList<>();
+    private ArrayList<PropertyCard> propertys = new ArrayList<>();
     private int money;
     private int posX;
     private int posY;
@@ -24,6 +25,23 @@ public class Player
         this.posX = posX;
         this.posY = posY;
         this.giveUp = giveUp;
+    }
+    
+    public void printPlayer(){
+        System.out.println("___________________________");
+        System.out.println(" ** Player info: ");
+        System.out.println(this.getUsername());
+        System.out.println("Your money: $" + this.getMoney() + " Dollars");
+        System.out.println("Your propertys");
+        for (PropertyCard property : this.propertys) {
+            System.out.println(property);
+        }
+        System.out.println("Your lucky cards");
+        for (Card card : this.cards) {
+            System.out.println(card);
+        }
+        System.out.println("___________________________");
+        
     }
     
     public int getMoney() {
@@ -81,6 +99,12 @@ public class Player
     public void setPosY(int posY) {
         this.posY = posY;
     }
-    
-    
+
+    public ArrayList<PropertyCard> getPropertys() {
+        return propertys;
+    }
+
+    public void setPropertys(ArrayList<PropertyCard> propertys) {
+        this.propertys = propertys;
+    }    
 }
