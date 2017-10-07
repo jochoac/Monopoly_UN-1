@@ -19,6 +19,14 @@ public class PropertyCard extends Card{
         this.mortgageValue = cost/2;
     }
     
+    @Override
+    public void print(){
+        super.print();
+        System.out.println("Value: " + this.cost);
+        System.out.println("Rent: " + this.rent);
+        System.out.println("Mortgage: " + this.mortgageValue);
+    };
+    
     public int getCost() {
         return cost;
     }

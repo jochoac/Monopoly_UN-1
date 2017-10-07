@@ -22,6 +22,14 @@ public class LuckyCard extends Card{
         this.penalty = penalty;
         this.bonus = bonus;        
     }
+    
+    @Override
+    public void print(){
+        super.print();
+        System.out.println("Description: " + this.description);
+        System.out.println("Bonus: " + this.bonus);
+        System.out.println("Penalty: " + this.penalty);
+    };
 
     public String getDescription() {
         return description;
