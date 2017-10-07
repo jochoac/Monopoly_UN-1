@@ -158,7 +158,7 @@ public class MonopolyTest {
                                     playerName = p3.getUsername();
                                 }
                             } else if (turn.validatePlayer(p4) && p4.isHasTurn()) {
-                                player = turn.playTurn(player);
+                                player = turn.playTurn(p4);
                                 p4 = player;
                                 if (turn.validatePlayer(p1)) {
                                     p1.setHasTurn(true);
@@ -205,10 +205,13 @@ public class MonopolyTest {
                             if (p1.isHasTurn()) {
                                 p1 = turn.giveUp(p1);
                                 if (turn.validatePlayer(p2)) {
+                                    p2.setHasTurn(true);
                                     playerName = p2.getUsername();
                                 } else if (turn.validatePlayer(p3)) {
+                                    p3.setHasTurn(true);
                                     playerName = p3.getUsername();
                                 } else if (turn.validatePlayer(p4)) {
+                                    p4.setHasTurn(true);
                                     playerName = p4.getUsername();
                                 } else {
                                     System.out.println("Thank you so much for play Monopoly Colombia!");
@@ -216,10 +219,13 @@ public class MonopolyTest {
                             } else if (p2.isHasTurn()) {
                                 p2 = turn.giveUp(p2);
                                 if (turn.validatePlayer(p3)) {
+                                    p3.setHasTurn(true);
                                     playerName = p3.getUsername();
                                 } else if (turn.validatePlayer(p4)) {
+                                    p4.setHasTurn(true);
                                     playerName = p4.getUsername();
                                 } else if (turn.validatePlayer(p1)) {
+                                    p1.setHasTurn(true);
                                     playerName = p1.getUsername();
                                 } else {
                                     System.out.println("Thank you so much for play Monopoly Colombia!");
@@ -227,10 +233,13 @@ public class MonopolyTest {
                             } else if (p3.isHasTurn()) {
                                 p3 = turn.giveUp(p3);
                                 if (turn.validatePlayer(p4)) {
+                                    p4.setHasTurn(true);
                                     playerName = p4.getUsername();
                                 } else if (turn.validatePlayer(p1)) {
+                                    p1.setHasTurn(true);
                                     playerName = p1.getUsername();
                                 } else if (turn.validatePlayer(p2)) {
+                                    p2.setHasTurn(true);
                                     playerName = p2.getUsername();
                                 } else {
                                     System.out.println("Thank you so much for play Monopoly Colombia!");
@@ -238,10 +247,13 @@ public class MonopolyTest {
                             } else if (p4.isHasTurn()) {
                                 p4 = turn.giveUp(p4);
                                 if (turn.validatePlayer(p1)) {
+                                    p1.setHasTurn(true);
                                     playerName = p1.getUsername();
                                 } else if (turn.validatePlayer(p2)) {
+                                    p2.setHasTurn(true);
                                     playerName = p2.getUsername();
                                 } else if (turn.validatePlayer(p3)) {
+                                    p3.setHasTurn(true);
                                     playerName = p3.getUsername();
                                 } else {
                                     System.out.println("Thank you so much for play Monopoly Colombia!");
