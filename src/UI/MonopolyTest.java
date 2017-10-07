@@ -8,8 +8,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author - Juan Ochoa 
- *         - Diego Ruiz
+ * @author - Juan Ochoa - Diego Ruiz
  */
 public class MonopolyTest {
 
@@ -96,12 +95,14 @@ public class MonopolyTest {
 
                 // Print to board for first time
                 System.out.println(gb.printBoard(p1.getUsername(), 0, 0));
-
+                Player player = p1;
+                Player nextPlayer = p1;
+                String playerName = p1.getUsername();
                 // Play Game
                 do {
-                    Player player = new Player("default", false, 0, -1, 0, true);
-                    System.out.println(" 1- Play turn\n 2- My info\n 3 - Give up");
-                    option = reader2.nextInt(3);
+                    System.out.println(playerName + " your turn");
+                    System.out.println(" 1- Drop the dice\n 2- Information\n 3 - Give up");
+                    option = reader2.nextInt(4);
                     switch (option) {
                         /*
                          *   Turns
@@ -113,31 +114,67 @@ public class MonopolyTest {
                                 p1 = player;
                                 if (turn.validatePlayer(p2)) {
                                     p2.setHasTurn(true);
+                                    playerName = p2.getUsername();
+                                } else if (turn.validatePlayer(p3)) {
+                                    p3.setHasTurn(true);
+                                    playerName = p3.getUsername();
+                                } else if (turn.validatePlayer(p4)) {
+                                    p4.setHasTurn(true);
+                                    playerName = p4.getUsername();
                                 } else {
                                     p1.setHasTurn(true);
+                                    playerName = p1.getUsername();
                                 }
                             } else if (turn.validatePlayer(p2) && p2.isHasTurn()) {
                                 player = turn.playTurn(p2);
                                 p2 = player;
                                 if (turn.validatePlayer(p3)) {
                                     p3.setHasTurn(true);
-                                } else {
+                                    playerName = p3.getUsername();
+                                } else if (turn.validatePlayer(p4)) {
+                                    p4.setHasTurn(true);
+                                    playerName = p4.getUsername();
+                                } else if (turn.validatePlayer(p1)) {
                                     p1.setHasTurn(true);
+                                    playerName = p1.getUsername();
+                                } else {
+                                    p2.setHasTurn(true);
+                                    playerName = p2.getUsername();
                                 }
                             } else if (turn.validatePlayer(p3) && p3.isHasTurn()) {
                                 player = turn.playTurn(p3);
                                 p3 = player;
                                 if (turn.validatePlayer(p4)) {
                                     p4.setHasTurn(true);
-                                } else {
+                                    playerName = p4.getUsername();
+                                } else if (turn.validatePlayer(p1)) {
                                     p1.setHasTurn(true);
+                                    playerName = p1.getUsername();
+                                } else if (turn.validatePlayer(p2)) {
+                                    p2.setHasTurn(true);
+                                    playerName = p2.getUsername();
+                                } else {
+                                    p3.setHasTurn(true);
+                                    playerName = p3.getUsername();
                                 }
                             } else if (turn.validatePlayer(p4) && p4.isHasTurn()) {
                                 player = turn.playTurn(player);
                                 p4 = player;
-                                p1.setHasTurn(true);
+                                if (turn.validatePlayer(p1)) {
+                                    p1.setHasTurn(true);
+                                    playerName = p1.getUsername();
+                                } else if (turn.validatePlayer(p2)) {
+                                    p2.setHasTurn(true);
+                                    playerName = p2.getUsername();
+                                } else if (turn.validatePlayer(p3)) {
+                                    p3.setHasTurn(true);
+                                    playerName = p3.getUsername();
+                                } else {
+                                    p4.setHasTurn(true);
+                                    playerName = p4.getUsername();
+                                }
                             } else {
-                                System.out.println("Error lógico en validación de usuarios");
+                                System.out.println("Logical error in play turn -- > --validate users--");
                             }
                             System.out.println(gb.printBoard(player.getUsername(), player.getPosY(), player.getPosX()));
 
@@ -145,20 +182,19 @@ public class MonopolyTest {
 
                         }
                         /*
-                         *   Info player
+                         *   Player info
                          *
                          */
                         case 2: {
                             if (p1.isHasTurn()) {
-                                
+                                p1.printPlayer();
                             } else if (p2.isHasTurn()) {
-                                
+                                p2.printPlayer();
                             } else if (p3.isHasTurn()) {
-                                
+                                p3.printPlayer();
                             } else if (p4.isHasTurn()) {
-                                
+                                p4.printPlayer();
                             }
-
                             break;
                         }
                         /*
@@ -167,13 +203,49 @@ public class MonopolyTest {
                          */
                         case 3: {
                             if (p1.isHasTurn()) {
-                                p1.setGiveUp(true);
+                                p1 = turn.giveUp(p1);
+                                if (turn.validatePlayer(p2)) {
+                                    playerName = p2.getUsername();
+                                } else if (turn.validatePlayer(p3)) {
+                                    playerName = p3.getUsername();
+                                } else if (turn.validatePlayer(p4)) {
+                                    playerName = p4.getUsername();
+                                } else {
+                                    System.out.println("Thank you so much for play Monopoly Colombia!");
+                                }
                             } else if (p2.isHasTurn()) {
-                                p2.setGiveUp(true);
+                                p2 = turn.giveUp(p2);
+                                if (turn.validatePlayer(p3)) {
+                                    playerName = p3.getUsername();
+                                } else if (turn.validatePlayer(p4)) {
+                                    playerName = p4.getUsername();
+                                } else if (turn.validatePlayer(p1)) {
+                                    playerName = p1.getUsername();
+                                } else {
+                                    System.out.println("Thank you so much for play Monopoly Colombia!");
+                                }
                             } else if (p3.isHasTurn()) {
-                                p3.setGiveUp(true);
+                                p3 = turn.giveUp(p3);
+                                if (turn.validatePlayer(p4)) {
+                                    playerName = p4.getUsername();
+                                } else if (turn.validatePlayer(p1)) {
+                                    playerName = p1.getUsername();
+                                } else if (turn.validatePlayer(p2)) {
+                                    playerName = p2.getUsername();
+                                } else {
+                                    System.out.println("Thank you so much for play Monopoly Colombia!");
+                                }
                             } else if (p4.isHasTurn()) {
-                                p4.setGiveUp(true);
+                                p4 = turn.giveUp(p4);
+                                if (turn.validatePlayer(p1)) {
+                                    playerName = p1.getUsername();
+                                } else if (turn.validatePlayer(p2)) {
+                                    playerName = p2.getUsername();
+                                } else if (turn.validatePlayer(p3)) {
+                                    playerName = p3.getUsername();
+                                } else {
+                                    System.out.println("Thank you so much for play Monopoly Colombia!");
+                                }
                             }
                             break;
                         }

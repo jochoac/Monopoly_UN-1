@@ -46,6 +46,8 @@ public class TurnController {
     public boolean validatePlayer(Player player) {
         return !player.isGiveUp();
     }
+    
+    
 
     public Player playTurn(Player player) {
 
@@ -104,4 +106,11 @@ public class TurnController {
         return player;
 
     }
+    
+    public Player giveUp(Player player){
+        player.setGiveUp(true);
+        player.setHasTurn(false);
+        return player;
+    }
+    
 }
