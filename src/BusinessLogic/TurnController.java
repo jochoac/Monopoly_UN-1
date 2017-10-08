@@ -59,7 +59,7 @@ public class TurnController {
             numberDice = dice.nextInt(6);
         } while (numberDice == 0);
         
-        System.out.println("Your number is: " + numberDice);
+        System.out.println(" --------- > Your number is: " + numberDice);
         if (player.getPosY() == 0 && player.getPosX() < 11) {
             x = player.getPosX();
             if (x + numberDice > 10) {
