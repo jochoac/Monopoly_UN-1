@@ -16,7 +16,7 @@ public interface ui {
     public Scanner reader = new Scanner(System.in);    
     
     void welcome();    
-    void options();
+    void options(String option);
     
     
 }
